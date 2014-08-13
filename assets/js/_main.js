@@ -1,28 +1,61 @@
 /* ========================================================================
  * DOM-based Routing
  * Based on http://goo.gl/EUTi53 by Paul Irish
- *
- * Only fires on body classes that match. If a body class contains a dash,
- * replace the dash with an underscore when adding it to the object below.
- *
- * .noConflict()
- * The routing is enclosed within an anonymous function so that you can 
- * always reference jQuery with $, even when in .noConflict() mode.
- *
- * Google CDN, Latest jQuery
- * To use the default WordPress version of jQuery, go to lib/config.php and
- * remove or comment out: add_theme_support('jquery-cdn');
  * ======================================================================== */
 
 (function($) {
 
-// Use this variable to set up the common and page specific functions. If you 
+// Use this variable to set up the common and page specific functions. If you
 // rename this variable, you will also need to rename the namespace below.
-var Roots = {
+var DKA = {
   // All pages
   common: {
     init: function() {
       // JavaScript to be fired on all pages
+        /**
+         * Copyright 2012, Digital Fusion
+         * Licensed under the MIT license.
+         * http://teamdf.com/jquery-plugins/license/
+         *
+         * @author Sam Sehnert
+         * @desc A small plugin that checks whether elements are within
+         *     the user visible viewport of a web browser.
+         *     only accounts for vertical position, not horizontal.
+         */
+
+        $.fn.visible = function(partial) {
+          
+            var $t            = $(this),
+                $w            = $(window),
+                viewTop       = $w.scrollTop(),
+                viewBottom    = viewTop + $w.height(),
+                _top          = $t.offset().top,
+                _bottom       = _top + $t.height(),
+                compareTop    = partial === true ? _bottom : _top,
+                compareBottom = partial === true ? _top : _bottom;
+          
+          return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
+
+        };
+
+        $('#mob-trigger').click(function(){
+            $('#mob-trigger').addClass('open');
+            $('body').append('<div class="menu-bg-cover"><div class="menu-container"></div></div><div class="overlayW"></div>');
+
+            $('.screen-nav').clone().appendTo('.menu-container').removeClass('screen-nav').addClass('mobi-nav');
+            setTimeout(function() {
+                $('.menu-container').addClass('in');
+                $('.overlayW').addClass('active');
+            }, 100);
+            $('.menu-bg-cover').click(function(){
+              $('.menu-container').removeClass('in').addClass('out');
+              $('#mob-trigger').removeClass('open');
+              setTimeout(function(){
+                  $('.menu-bg-cover').remove();
+                  $('.overlayW').remove();
+              }, 1000);
+            });
+        });
     }
   },
   // Home page
@@ -31,19 +64,66 @@ var Roots = {
       // JavaScript to be fired on the home page
     }
   },
-  // About us page, note the change from about-us to about_us.
-  about_us: {
-    init: function() {
-      // JavaScript to be fired on the about us page
+  about: {
+    init: function(){
+      // about page only
     }
-  }
-};
+  },
+  blog: {
+    init: function() {
+      // bog page only
+
+      }
+    },
+  bio: {
+    init: function(){
+      // bio page only
+        $('.mac-bg h1').addClass('move-up');
+        
+        $('.progress').each(function(i, el){
+          el = $(el);
+          if (el.visible(true)) {
+            el.css('width', el.text());
+          }
+        });
+        $(window).scroll(function(event) {
+            $('.progress').each(function(i, el){
+              el = $(el);
+              if (el.visible(true)) {
+                el.css('width', el.text());
+              }
+            });
+        });
+
+        
+      }
+    },
+    work: {
+      init: function(){
+        var el = $('.description').find('h1'), fl;
+        el.each(function(i, el){
+            var newel = $(el);
+            fl = newel.text().charAt(0);
+            $(this).parent().find('span').append(fl);
+        });
+
+        $('.project a').hover(function(){
+          $(this).find('.tech').addClass('animate');
+          $(this).find('h1').addClass('animate');
+        }, function(){
+          $(this).find('.tech').removeClass('animate');
+          $(this).find('h1').removeClass('animate');
+        });
+      }
+    }
+  };
 
 // The routing fires all common scripts, followed by the page specific scripts.
 // Add additional events for more control over timing e.g. a finalize event
+
 var UTIL = {
   fire: function(func, funcname, args) {
-    var namespace = Roots;
+    var namespace = DKA;
     funcname = (funcname === undefined) ? 'init' : funcname;
     if (func !== '' && namespace[func] && typeof namespace[func][funcname] === 'function') {
       namespace[func][funcname](args);
