@@ -12,10 +12,8 @@
     do_action('get_header');
     get_template_part('templates/header');
   ?>
-
   
-  <?php include roots_template_path(); ?>
-  
+  <?php include roots_template_path(); ?>  
 
   <?php get_template_part('templates/footer'); ?>
 
