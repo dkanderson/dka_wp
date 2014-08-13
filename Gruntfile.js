@@ -92,8 +92,8 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      less: {
-        cssmin: [
+      cssmin: {
+        files: [
           'assets/css/*.css'
         ],
         tasks: ['cssmin', 'autoprefixer:dev']
