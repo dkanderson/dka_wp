@@ -1,2 +1,10 @@
-<time class="published" datetime="<?php echo get_the_time('c'); ?>"><?php echo get_the_date(); ?></time>
-<p class="byline author vcard"><?php echo __('By', 'roots'); ?> <a href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>" rel="author" class="fn"><?php echo get_the_author(); ?></a></p>
+<time class="post-date published" datetime="<?php echo get_the_time('c'); ?>">
+    <p>
+        <strong><?php echo get_the_date('d'); ?></strong>
+        <?php echo get_the_date('M'); ?>
+        <span><?php echo get_the_date('Y'); ?></span>
+    </p>
+</time>
+<a title="Comments" href="<?php the_permalink(); ?>" class="comments-link">
+    <?php if (have_comments()) : ?><span><?php get_comments_number(); ?></span><?php else : ?><span>0</span><?php endif ?> Comments
+</a>

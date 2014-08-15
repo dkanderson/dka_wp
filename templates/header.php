@@ -1,4 +1,4 @@
-<div class="bg-bleed-wrap <?php if($body_class == 'blog'){ echo 'blog-header'; } ?>">
+<div class="bg-bleed-wrap <?php if(is_home() || is_single()){ echo 'blog-header'; } ?>">
     <header class="main" role="navigation">
         <div class="container">
             <a class="branding" href="<?php echo esc_url(home_url('/')); ?>">
@@ -25,6 +25,9 @@
             <p>...and loving every second</p>
         </div>
     </div>
+    <?php } ?>
+    <?php if(is_home() || is_single()){ ?>
+        <?php get_template_part('templates/page', 'header'); ?>
     <?php } ?>
 </div>
 
