@@ -18,19 +18,19 @@ $prefix = '_dka_';
 
 // Skills
 
-$meta_boxes[] = array(
+$meta_boxes['skills_metabox'] = array(
   'id' => 'skills_metabox',
-	'title' => 'Skills',
+	'title' => __('Skills', 'cmb'),
 	'pages' => array('skill',), //Post type
 	'context' => 'normal',
 	'priority' => 'high',
 	'show_names' => true,
 	'fields' => array(
 		array(
-			'name' => 'SVG',
-			'desc' => 'Enter compressed and fully optimized svg',
+			'name' => __('SVG', 'cmb'),
+			'desc' => __('Enter compressed and fully optimized svg', 'cmb'),
 			'id'   => $prefix . 'svg',
-			'type' => 'text',
+			'type' => 'file',
 		),
 	),
 );
@@ -39,7 +39,7 @@ $meta_boxes[] = array(
 
 // Projects 
 
-$meta_boxes[] = array(
+$meta_boxes['project_metabox'] = array(
 'id' => 'project_metabox',
 'title' => 'Projects Meta Information',
 'pages' => array( 'project', ), // Post type
@@ -48,33 +48,33 @@ $meta_boxes[] = array(
 'show_names' => true, // Show field names on the left
 'fields' => array(
 	array(
-	'name' => 'URL',
-	'desc' => 'Project URL',
+	'name' => __('URL', 'cmb'),
+	'desc' => __('Project URL', 'cmb'),
 	'id' => $prefix . 'profile_title',
 	'type' => 'text_medium',
 	),
 	array(
-		'name'     => 'Tech',
-		'desc'     => 'What tech was used',
+		'name'     => __('Tech', 'cmb'),
+		'desc'     => __('What tech was used', 'cmb'),
 		'id'       => $prefix . 'tech_select',
 		'type'     => 'taxonomy_multicheck',
 		'taxonomy' => 'tech', // Taxonomy Slug
 	),
 	array(
-	'name' => 'Screenshot_1',
-	'desc' => 'Upload an image or enter the URL.',
+	'name' => __('Screenshot_1', 'cmb'),
+	'desc' => __('Upload an image or enter the URL.', 'cmb'),
 	'id' => $prefix . 'ss1',
 	'type' => 'file',
 	),
 	array(
-	'name' => 'Screenshot_2',
-	'desc' => 'Upload an image or enter the URL.',
+	'name' => __('Screenshot_2', 'cmb'),
+	'desc' => __('Upload an image or enter the URL.', 'cmb'),
 	'id' => $prefix . 'ss2',
 	'type' => 'file',
 	),
 	array(
-	'name' => 'Screenshot_3',
-	'desc' => 'Upload an image or enter the URL.',
+	'name' => __('Screenshot_3', 'cmb'),
+	'desc' => __('Upload an image or enter the URL.', 'cmb'),
 	'id' => $prefix . 'ss3',
 	'type' => 'file',
 	),
