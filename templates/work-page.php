@@ -1,72 +1,41 @@
-<?php //the_content(); ?>
-<div class="intro">
+        <div class="intro">
             <div class="container">
                 <h1>Recent Projects</h1>
-                <p>Some of my more recent projects are some of my best work to date, if these dont impress you come back in a month or so I am always improving.</p>
+                <p><?php echo get_the_content(); ?></p>
             </div>
         </div>
         <section id="folio" class="cf">
+            <?php 
+                $args = array('post_type' => 'project');
+                $projects = new WP_Query($args);
+                while( $projects->have_posts() ) : 
+                $projects->the_post();
+
+                $project_url = get_post_meta($post->ID, '_dka_project_url', true);
+                $project_img = get_post_meta($post->ID, '_dka_project_img', true);
+             ?>
             <article class="project">
-                <a href="project.php" class="soleil" title="Soleil Laurent" href="#">
+                <a title="S<?php echo get_the_title(); ?>" href="<?php the_permalink(); ?>" style="background-image:url(<?php echo $project_img; ?>);">
                     <div class="description">
                         <span></span>
-                        <h1>Soleil Laurent</h1>
+                        <h1><?php echo get_the_title(); ?></h1>
                     </div>
                     <div class="tech">
                         <ul>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                            <li>Javascript</li>
-                            <li>Wordpress</li>
+                        <?php 
+                            $terms = get_terms('tech');
+                            $count = count($terms);
+                            if($count > 0){
+                                echo '<ul>';
+                                foreach ($terms as $term) {
+                                    echo '<li>'.$term->name.'</li>';
+                                }
+                                echo '</ul>';
+                            }
+                        ?>
                         </ul>
                     </div>
                 </a>
             </article>
-            <article class="project">
-                <a href="project.php" class="fitfarm" title="Fit Farm" href="#">
-                    <div class="description">
-                        <span></span>
-                        <h1>Fitfarm</h1>
-                    </div>
-                    <div class="tech">
-                        <ul>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                            <li>Javascript</li>
-                            <li>Wordpress</li>
-                        </ul>
-                    </div>
-                </a>
-            </article>
-            <article class="project">
-                <a href="project.php" class="tossnroll" title="TossandRoll" href="#">
-                    <div class="description">
-                        <span></span>
-                        <h1>Toss and Roll</h1>
-                    </div>
-                    <div class="tech">
-                        <ul>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                            <li>Javascript</li>
-                        </ul>
-                    </div>
-                </a>
-            </article>
-            <article class="project">
-                <a href="project.php" class="creative" title="Creative Building Finishes" href="#">
-                    <div class="description">
-                        <span></span>
-                        <h1>Creative Building Finishes</h1>
-                    </div>
-                    <div class="tech">
-                        <ul>
-                            <li>HTML5</li>
-                            <li>CSS3</li>
-                            <li>Javascript</li>
-                            <li>Wordpress</li>
-                        </ul>
-                    </div>
-                </a>
-            </article>
+        <?php endwhile ?>
         </section>

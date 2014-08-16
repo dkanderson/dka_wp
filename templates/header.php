@@ -1,4 +1,4 @@
-<div class="bg-bleed-wrap <?php if(is_home() || is_single()){ echo 'blog-header'; } ?>">
+<div class="bg-bleed-wrap <?php if(is_home() || get_post_type() == 'post'){ echo 'blog-header'; } ?>">
     <header class="main" role="navigation">
         <div class="container">
             <a class="branding" href="<?php echo esc_url(home_url('/')); ?>">
@@ -26,7 +26,7 @@
         </div>
     </div>
     <?php } ?>
-    <?php if(is_home() || is_single()){ ?>
+    <?php if(is_home() || get_post_type() == 'post'){ ?>
         <?php get_template_part('templates/page', 'header'); ?>
     <?php } ?>
 </div>
