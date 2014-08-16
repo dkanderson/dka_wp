@@ -20,3 +20,10 @@ function roots_wp_title($title) {
   return $title;
 }
 add_filter('wp_title', 'roots_wp_title', 10);
+
+// Allow SVG uploads
+function allow_svg_upload_mimes( $mimes ) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter( 'upload_mimes', 'allow_svg_upload_mimes' );
