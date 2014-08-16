@@ -50,7 +50,7 @@ $meta_boxes['project_metabox'] = array(
 	array(
 	'name' => __('URL', 'cmb'),
 	'desc' => __('Project URL', 'cmb'),
-	'id' => $prefix . 'profile_title',
+	'id' => $prefix . 'project_url',
 	'type' => 'text_medium',
 	),
 	array(
@@ -59,6 +59,12 @@ $meta_boxes['project_metabox'] = array(
 		'id'       => $prefix . 'tech_select',
 		'type'     => 'taxonomy_multicheck',
 		'taxonomy' => 'tech', // Taxonomy Slug
+	),
+	array(
+	'name' => __('Project Background Image [680 x 460]', 'cmb'),
+	'desc' => __('Upload an image or enter the URL.', 'cmb'),
+	'id' => $prefix . 'project_img',
+	'type' => 'file',
 	),
 	array(
 	'name' => __('Screenshot_1', 'cmb'),
