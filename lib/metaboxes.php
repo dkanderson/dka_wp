@@ -28,9 +28,9 @@ $meta_boxes['skills_metabox'] = array(
 	'fields' => array(
 		array(
 			'name' => __('SVG', 'cmb'),
-			'desc' => __('Enter compressed and fully optimized svg', 'cmb'),
+			'desc' => __('Enter slug->name', 'cmb'),
 			'id'   => $prefix . 'svg',
-			'type' => 'file',
+			'type' => 'text_small',
 		),
 	),
 );
