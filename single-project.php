@@ -6,22 +6,32 @@
 
 
 	$bg_image = wp_get_attachment_url( get_post_thumbnail_id($post->ID));
+	$title_array = str_split(get_the_title());
 ?>
 <section id="client-banner" style="background-image:url(<?php echo $bg_image; ?>);">
-	<a class="project-link" href="http://soleillaurent.com">S</a>
-	<div class="project-nav"><a class="prev-project" href="<?php echo $project_url; ?>"><svg class="icon icon-arrow-left" viewBox="0 0 32 32"><use xlink:href="#icon-arrow-left"></use></svg></a><a class="next-project" href="#"><svg class="icon icon-arrow-left2" viewBox="0 0 32 32"><use xlink:href="#icon-arrow-left2"></use></svg></a></div>
+	<a class="project-link" href="<?php echo $project_url; ?>"><span><?php echo $title_array[0]; ?></span></a>
+	<div class="project-nav">
+		<a title="<?php echo get_the_title(get_adjacent_post(false,'',true)); ?>" class="prev-project arrow" href="<?php echo get_permalink(get_adjacent_post(false,'',true)); ?>">
+			<span class="project-nav-label"><?php echo get_the_title(get_adjacent_post(false,'',true)); ?></span>
+			<svg class="icon icon-arrow-left" viewBox="0 0 32 32"><use xlink:href="#icon-arrow-left"></use></svg>
+		</a>
+		<a title="<?php echo get_the_title(get_adjacent_post(false,'',false)); ?>" class="next-project arrow" href="<?php echo get_permalink(get_adjacent_post(false,'',false)); ?>">
+			<span class="project-nav-label"><?php echo get_the_title(get_adjacent_post(false,'',false)); ?></span>
+			<svg class="icon icon-arrow-left2" viewBox="0 0 32 32"><use xlink:href="#icon-arrow-left2"></use></svg>
+		</a>
+	</div>
 </section>
 <section id="soleil_laurent">
 	<div class="container sixteen columns clearfix">
 		<div class="container eight columns">
-			<div class="fold "><img src="<?php echo $screenshot1; ?>" alt="Soleil Laurent Home Page Screenshot"></div>
+			<div class="fold"><img src="<?php echo $screenshot1; ?>" alt="<?php echo get_the_title(); ?> Screenshot"></div>
 		</div>
 		<div class="container eight columns">
 			<div class="client-meta">
 				<h1><?php echo get_the_title(); ?></h1>
 				<dl>
 					<dt>url</dt>
-						<dd><a title="Soleil Laurent" href="<?php echo $project_url; ?>"><?php echo $project_url; ?></a></dd>
+						<dd><a title="<?php echo get_the_title(); ?>" href="<?php echo $project_url; ?>"><?php echo $project_url; ?></a></dd>
 					<dt>tech</dt>
 						<dd>
 							<?php
