@@ -62,11 +62,7 @@ var DKA = {
   home: {
     init: function() {
       // JavaScript to be fired on the home page
-    }
-  },
-  about: {
-    init: function(){
-      // about page only
+      console.log('firing');
     }
   },
   blog: {
@@ -113,6 +109,17 @@ var DKA = {
         }, function(){
           $(this).find('.tech').removeClass('animate');
           $(this).find('h1').removeClass('animate');
+        });
+      }
+    },
+    single_project: {
+      init: function(){
+        console.log('firing');
+        $('.arrow').hover(function(){
+          console.log('on');
+          $(this).find('.project-nav-label').addClass('animate-label');
+        }, function(){
+          $(this).find('.project-nav-label').removeClass('animate-label');
         });
       }
     }
